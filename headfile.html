@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<link rel="stylesheet" type="text/css" href="mystylesheet.css">
+</head>
+<body>
+
+<div id="container">
+<div id="header">
+<h1>homteq`</h1>
+<h2>your home for home tech</h2>
+<h3><?php echo "London, ".date('d F Y H:i:s'); ?></h3>
+</div>
+<div id="navigation">
+<ul>
+
+<?php
+
+if (!isset($_SESSION['userid'])){
+echo "<li><a href='index.php'>Home Tech</a></li>";
+echo "<li><a href='aboutus.php'>About Us</a></li>";
+echo "<li><a href='signup.php'>Sign Up</a></li>";
+echo "<li><a href='login.php'>Login</a></li>";
+echo "<li style='float: right'><a href='login.php'>Staff Login</a></li>";
+echo "<li style='float: right'><a href='basket.php'>Smart Basket</a></li>";
+}
+
+else{
+if($_SESSION['user_type']=="Customer"){
+echo "<li><a href='index.php'>Home Tech</a></li>";
+echo "<li><a href='aboutus.php'>About Us</a></li>";
+echo "<li><a href='logout.php'>Logout</a></li>";
+echo "<li style='float: right'><a href='basket.php'>Smart Basket</a></li>";
+}
+
+if($_SESSION['user_type']=='Administrator'){
+echo "<li><a href='index.php'>Home Tech</a></li>";
+echo "<li><a href='addproduct.php'>Add Product</a></li>";
+echo "<li><a href='editproduct.php'>Edit Product</a></li>";
+echo "<li><a href='processorders.php'>Process Orders</a></li>";
+echo "<li><a href='logout.php'>Logout</a></li>";
+}
+}
+
+?>
+
+
+</ul>
+</div>
+<div id="content">
+
+</body>
+</html>

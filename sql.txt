@@ -1,0 +1,134 @@
+CREATE DATABASE w1673693_nisal;
+
+USE w1673693_nisal;
+
+CREATE TABLE Product(
+prodId int (4) primary key AUTO_INCREMENT,
+prodName varchar(30) not null,
+prodPicNameSmall varchar(100) not null,
+prodPicNameLarge varchar(100) not null,
+prodDescripShort varchar(1000) null,
+prodDescripLong varchar(3000) null,
+prodPrice decimal (6,2) not null,
+prodQuantity int(4) not null,
+UNIQUE(prodName)); 
+
+INSERT INTO Product VALUES (
+1,
+"Amazon Smart Speaker", 
+"images/1Small.jpg",
+"images/1Large.jpg",
+"Echo Spot is designed to fit anywhere in your home. 
+Use 2nd generation far-field voice recognition to watch video flash briefings, see music lyrics, weather forecasts, 
+to-do and shopping lists, browse and listen to Audible audiobooks, and more.",
+"Echo Spot connects to Alexa, a cloud-based voice service to play music, read the news, answer questions, set music alarms, control smart home, and more.
+Just ask to play a song, artist, or genre, and see lyrics with Amazon Music. Also, stream music from Apple Music, Spotify, 
+Pandora, and other music services, or books from Audible.",
+129.99,
+2);
+
+USE w1673693_nisal;
+INSERT INTO Product  VALUES (
+"",
+"Google Home Mini",
+"images/2Small.jpg",
+"images/2Large.jpg",
+"Google Home Mini is a smart speaker with the Google Assistant built in. So whenever you need help, it's by your side",
+"Google Home Mini requires a Wi-Fi network, a nearby electrical outlet and a compatible mobile device. 
+Controlling certain devices and features in your home requires a compatible smart device. For example, 
+the query Play 'Stranger Things' on my TV requires a Chromecast, 
+and controlling devices like lights and thermostats requires compatible smart lights and smart thermostats linked to Google Home. 
+Controlling devices such as coffee makers, baby monitors and fans in your home requires compatible smart plugs and/or switches. 
+Subscription(s) may be required, and additional terms, conditions and/or charges may apply.",
+29.99,
+5);
+
+USE w1673693_nisal;
+INSERT INTO Product VALUES (
+'',
+"Google Home Hub",
+"images/3Small.jpg",
+"images/3Large.jpg",
+"Voice-control thousands of compatible devices, from lights and cameras to TVs and more, all from a single dashboard.",
+"Google Home Hub requires a Wi-Fi network, a nearby electrical outlet, and a compatible (Android, iOS) mobile device.
+ Minimum OS requirements are available at g.co/home/req., Compatible smart device required. Subscription(s) are required to access certain content. 
+ Casting optimized for selected services only. Additional terms, conditions and/or charges may apply.",
+ 99.99,
+ 3);
+ 
+ USE w1673693_nisal;
+ INSERT INTO Product VALUES (
+ '',
+ "Google Home",
+ "images/4Small.jpg",
+ "images/4Large.jpg",
+ "Get answers, play songs, tackle your day, enjoy your entertainment and control your smart home with just your voice.",
+ "Requires Internet connection. Controlling certain devices and features in your home requires a compatible smart device. 
+ For example, the query Play 'The Crown' on my TV requires a Chromecast-connected TV, 
+ and controlling devices like lights and thermostats requires compatible smart lights 
+ and smart thermostats linked to Google Home. Controlling devices such as coffee makers, 
+ baby monitors and fans in your home requires compatible smart plugs and/or switches.",
+ 89.99,
+ 5);
+ 
+ USE w1673693_nisal;
+ INSERT INTO Product VALUES (
+ '',
+ "Google Wifi",
+ "images/5Small.jpg",
+ "images/5Large.jpg",
+ "Google Wifi replaces your old router network and works with your modem 
+ and ISP to create a mesh network. Increase your home Wi-Fi coverage so you can stream, 
+ download, and share without missing a beat.",
+ "Home materials and layout can affect how Wi-Fi signal travels. 
+ For homes with brick walls or long narrow layouts, you may need an extra Wifi point to get full coverage.
+ The Google Wifi app is compatible with Wi-Fi-enabled Android devices running Android 4.0 or higher, 
+ or iOS devices running iOS 8.0 or higher. 
+ iOS is a trademark or registered trademark of Cisco in the U.S.A. and other countries and is used under license.",
+ 99.99,
+ 6);
+ 
+ USE w1673693_nisal;
+ INSERT INTO Product VALUES (
+ '',
+ "Google Chromrcast ultra",
+ "images/6Small.jpg",
+ "images/6Large.jpg",
+ "A streaming device that plugs into your TV's HDMI port, 
+ Chromecast Ultra provides fast, reliable 4k video with minimal buffering and smooth streaming. Use your iPhone, iPad, 
+ Android device or laptop to stream video from thousands of Cast-enabled apps.",
+ "Enjoy a crisper picture, deeper color and smoother video when streaming up to 4K content to a 4K TV¹ with Chromecast Ultra. Whether your TV is 4K or HD,
+ Chromecast Ultra packs a faster CPU and automatically optimizes content for the best picture quality possible. Your shows play faster, smoother and more reliably. 
+ Even if your Wi-Fi network isn’t ready for the demands of 4K, 
+ Chromecast Ultra comes with an Ethernet adapter so you can enjoy smooth streaming over a wired connection.",
+ 69.99,
+ 10);
+
+CREATE TABLE Users(
+userId int (4) primary key AUTO_INCREMENT,
+userType varchar(1) not null,
+userFName varchar(50) not null,
+userSName varchar(50) not null,
+userAddress varchar(50) not null,
+userPostCode varchar(50) not null,
+userTelNo varchar(50) not null,
+userEmail varchar(50) not null,
+userPassword varchar(50) not null); 
+
+CREATE TABLE Orders(
+orderNo int (4) primary key AUTO_INCREMENT,
+userId int (4),
+orderDateTime datetime,
+orderTotal decimal (8,2) DEFAULT 0.00,
+CONSTRAINT fk_1 FOREIGN KEY(userId) REFERENCES Users(userId));
+
+CREATE TABLE Order_Line(
+orderLineId int (4) primary key AUTO_INCREMENT,
+orderNo int (4),
+prodId int (4),
+quantityOrdered int (4),
+subTotal decimal (8,2) DEFAULT 0.00,
+CONSTRAINT fk_2 FOREIGN KEY(orderNo) REFERENCES Orders(orderNo),
+CONSTRAINT fk_3 FOREIGN KEY(prodId) REFERENCES Product(prodId));
+
+
